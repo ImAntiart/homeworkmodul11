@@ -1,0 +1,122 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgba(255, 214, 255, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-size: 25px
+}
+
+
+.chat-container {
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: rgba(231, 198, 255, 1);
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+
+#messages {
+    height: 70vh;
+    overflow-y: auto;
+    padding: 15px;
+    background-color: rgba(184, 192, 255, 1);
+    border: 5px solid rgb(156, 141, 201);
+}
+
+#messages p {
+    margin: 5px;
+    padding: 10px;
+    background-color: rgba(200, 182, 255, 1);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+#messageInput {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border: none;
+    border-top: 1px solid rgba(187, 208, 255, 1);
+    outline: none;
+    font-size: 16px;
+    background-color: rgba(200, 182, 255, 1);
+        border: 2px solid rgb(156, 141, 201);
+}
+
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: rgba(187, 208, 255, 1);
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: rgba(149, 168, 205, 1); 
+}
+
+
+.chat-container form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: rgba(231, 198, 255, 1);
+    border: 2px solid rgb(156, 141, 201);
+}
+
+.chat-container form button {
+    flex-shrink: 0;
+}
+
+
+@media (max-width: 1440px) {
+    body {
+        font-size: 20px;
+    }
+
+    .chat-container {
+        transform: scale(0.95);
+    }
+}
+
+@media (max-width: 1024px) {
+
+    body {
+        font-size: 20px;
+    }
+
+    .chat-container {
+        transform: scale(0.85);
+    }
+}
+
+@media (max-width: 768px) {
+
+    body {
+        font-size: 20px;
+    }
+    .chat-container {
+        transform: scale(0.75);
+    }
+}
+
+@media (max-width: 480px) {
+
+    body {
+        font-size: 20px;
+    }
+    .chat-container {
+        transform: scale(0.65);
+    }
+}
