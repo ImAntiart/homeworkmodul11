@@ -5,10 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('form');
 
     // Создаем экземпляр WebSocket и подключаемся к серверу
-    const socket = new WebSocket('ws://localhost:8080'); 
+    const socket = new WebSocket('ws://localhost:8080'); // Убедитесь, что адрес совпадает с вашим сервером
 
     // Обрабатываем событие открытия соединения
-    socket.onopen = function(event) {
+    socket.onopen = function() {
         console.log('Соединение установлено.');
     };
 
@@ -29,7 +29,7 @@ socket.onmessage = function(event) {
         };
         reader.readAsText(event.data);
     }
-    
+
     if (!message) return;
     addMessageToChat(message);
 };
