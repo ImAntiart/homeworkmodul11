@@ -13,15 +13,26 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
 // Обрабатываем получение сообщений от сервера
-socket.onmessage = function(event) {
-    // Преобразуем Blob в текст
-    const reader = new FileReader();
-    reader.onloadend = function() {
-        addMessageToChat(reader.result);
-    };
-    reader.readAsText(event.data);
-};
 
+socket.onmessage = function(event) {
+    let message;
+
+    ////  И ТУТ МЫ ТАКИЕ проверяем тип данных, кто перед нами
+    if (typeof event.data === 'string') {
+        message = event.data;
+    } else if (event.data instanceof Blob) {
+        // Внезапно, если нашли этого блоба, берем и преобразуем этого амогуса в текст
+        const reader = new FileReader();
+        reader.onloadend = function() {
+            message = reader.result;
+            addMessageToChat(message);
+        };
+        reader.readAsText(event.data);
+    }
+    
+    if (!message) return;
+    addMessageToChat(message);
+};
     // Обрабатываем ошибку соединения
     socket.onerror = function(error) {
         console.error('Ошибка WebSocket:', error);
@@ -34,7 +45,7 @@ socket.onmessage = function(event) {
 
     // Функция для добавления сообщения в область чата
     function addMessageToChat(message) {
-        const messageDiv = document.createElement('div');
+        const messageDiv = document.createElement('p');
         messageDiv.textContent = message;
         messagesContainer.appendChild(messageDiv);
 

@@ -10,18 +10,11 @@ let clients = [];
 const wss = new WebSocket.Server({ port: PORT });
 
 wss.on('connection', function connection(ws) {
-    // Добавляем новое соединение к массиву клиентов
     clients.push(ws);
-
     console.log(`Новый клиент подключился! Всего клиентов: ${clients.length}`);
-
-    // Отправляем приветственное сообщение новому клиенту
     ws.send('Приветствуем вас в нашем чате!');
-
     ws.on('message', function incoming(message) {
         console.log('Получено сообщение:', message);
-        
-        // Пересылаем сообщение всем подключенным клиентам
         broadcastMessage(message);
     });
 
