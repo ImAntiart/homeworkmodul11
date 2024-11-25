@@ -1,0 +1,47 @@
+const WebSocket = require('ws');
+
+
+const wss = new WebSocket.Server({ port: 8080 });
+
+
+let clients = [];
+
+
+wss.on('connection', function connection(ws) {
+    clients.push(ws);
+    console.log('Новое соединение установлено.');
+    ws.send('Добро пожаловать на WebSocket-сервер!');
+    ws.on('message', function incoming(message) {
+        console.log(`Получено сообщение: ${message}`);
+        broadcastMessage(message);
+    });
+
+    // Обрабатываем событие закрытия соединения
+    ws.on('close', () => {
+        console.log('Клиент отключился.');
+        
+        // Удаляем клиента из массива активных соединений
+        clients = clients.filter(client => client !== ws);
+    });
+});
+
+// Функция для отправки сообщения всем активным клиентам
+/* function broadcastMessage(message) {
+    clients.forEach(function each(client) {
+        if (client.readyState === WebSocket.OPEN) {
+            client.send(message);
+        }
+    });
+} */
+
+// Функция для отправки сообщения всем активным клиентам
+function broadcastMessage(message) {
+    clients.forEach(function each(client) {
+        if (client.readyState === WebSocket.OPEN) {
+            // Отправляем сообщение как строку
+            client.send(String(message));
+        }
+    });
+}
+
+console.log('WebSocket сервер запущен на localhost:8080');
