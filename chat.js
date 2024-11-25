@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('form');
 
     // Создаем экземпляр WebSocket и подключаемся к серверу
-    const socket = new WebSocket('ws://localhost:8080'); // Убедитесь, что адрес совпадает с вашим сервером
+    const socket = new WebSocket('ws://localhost:8080'); 
 
     // Обрабатываем событие открытия соединения
     socket.onopen = function(event) {
